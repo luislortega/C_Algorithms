@@ -11,3 +11,5 @@
 - #9 Send two variables one float and integer, if the float lenght is less than integer concat "*" 
 - #10 Convert a float to binary 
 - #11 Integer num to binary
+- #12 returns the number of leap years between two years
+- #13 returns the future gain subject to an interest for n time
