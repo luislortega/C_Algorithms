@@ -9,7 +9,8 @@
 - #7 Check if the var n is a palindrome
 - #8 Convert a float to String
 - #9 Send two variables one float and integer, if the float lenght is less than integer concat "*" 
-- #10 Convert a float to binary 
+- #10 Convert a float to binary S
 - #11 Integer num to binary
-- #12 returns the number of leap years between two years
-- #13 returns the future gain subject to an interest for n time
+- #12 Check if the year is bisiest 
+- #13 An integer to binary decimal convertion
+- #14 Calculate cos(x) in radians
