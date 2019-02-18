@@ -1,40 +1,35 @@
 /**
  * Author: Luis Gerardo Leon Ortega
- * Entrada: dos numero n
- * Salida general: un string con el resultado
+ * Entrada: un numero n
+ * Salida general: una suma de los primero n numeros pares
  * Proceso general:
- * - El programa reciba 2 números y te indique si el 1er numero es múltiplo del segundo.
+ * - La suma de los primeros n numeros pares
  */
 #include <stdio.h>
 
-int numero, numero2;
-char* resultado;
+int numero, suma;
 
 int main() {
     /* entrada */
     printf("Ingresa un numero: ");
     scanf("%d", &numero);
 
-    printf("Ingresa tu segundo numero: ");
-    scanf("%d", &numero2);
-
     /* procedimiento */
-    if((numero%numero2) == 0){
-        resultado = "Es multiplo";
-    }else{
-        resultado = "No es multiplo";
+    for (int i = 2; i <= numero; ++i) {
+        if((i%2) == 0){
+            suma = suma + i;
+        }
     }
 
     /* salida */
-    printf(resultado);
+    printf("Resultado: %d",suma);
     return 0;
 }
 /*
 * QA: Hector A. V. Cosgalla
-* Entrada: dos numero n
-* Salida general: un string con el resultado
+* Entrada: un numero n
+* Salida general: una suma de los primero n numeros pares
 * Proceso general:
-* - El programa reciba 2 números y te indique si el 1er numero es múltiplo del segundo.
-* Comentario: Funciona bien pero no compilaba por la declaracion "scanf_s" y las
-* variables no deben ser globales!
+* - La suma de los primeros n numeros pares
+* Comentario: Problema al compilar "scanf_s" y las variabes deben ser locales de ahi en fuera funciona bien
 */

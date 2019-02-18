@@ -1,37 +1,22 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
-#include<float.h>
+/*
+ * C program to convert the given binary number into decimal
+ */
+#include <stdio.h>
 
-static void print_ipart(long double x) {
-    int digit = (int) (modfl(x/2, &x)*2.0) + '0';
-    if (x) {
-        print_ipart(x);
+void main()
+{
+    int  num, binary_val, decimal_val = 0, base = 1, rem;
+
+    printf("Enter a binary number(1s and 0s) \n");
+    scanf("%d", &num); /* maximum five digits */
+    binary_val = num;
+    while (num > 0)
+    {
+        rem = num % 10;
+        decimal_val = decimal_val + rem * base;
+        num = num / 10 ;
+        base = base * 2;
     }
-    putchar(digit);
-}
-
-void print_bin(long double x) {
-    // Some TBD code
-    // Handle NAN with isnan()
-    // Handle infinity with isfinite()
-
-    putchar(signbit(x) ? '-' : '+');
-
-    long double ipart;
-    long double fpart = modfl(fabsl(x), &ipart);
-
-    print_ipart(ipart);
-    putchar('.');
-    while (fpart) {
-        long double ipart;
-        fpart = modfl(fpart * 2, &ipart);
-        putchar((int)ipart + '0');
-    }
-    putchar('\n');
-}
-
-int main() {
-    print_bin(1.25);
-    print_bin(.575);
+    printf("The Binary number is = %d \n", binary_val);
+    printf("Its decimal equivalent is = %d \n", decimal_val);
 }

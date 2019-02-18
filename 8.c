@@ -1,91 +1,125 @@
 /**
  * @author Luis Gerardo Leon Ortega
- * problema 13.
+ * ALGORITMO PUNTO EXTRA NUMERO 13
  */
-#include<stdio.h>
+#include <stdio.h>
 
-int elevar(int, int);
-void floatToString(float, char*, int);
-void reversa(char*, int);
-int enteroString(int, char[], int);
+void entradas(float*, int*);
+int proceso(float, int);
+void salidas(float, int);
 
-int main()
-{
-    char res[20];
-    float n = 233.007;
+int tamanoDec(float);
+int tamanoEnt(int);
+void imprimir(float);
 
-    floatToString(n, res, 3);
-
-    printf("\n\"%s\"\n", res);
+int main() {
+    /* entradas */
+    float x = 0; int y = 0;
+    entradas(&x, &y);
+    /* proceso */
+    int resultado = proceso(x, y);
+    /* salidas */
+    salidas(x,resultado);
     return 0;
 }
 
 /*
- * Convierte un numero entero dado a String
+ * Entradas
  */
-int enteroString(int x, char str[], int d)
-{
-    int i = 0;
-    while (x)
+void entradas(float *x, int *y){
+    scanf_s("%f", x);
+    scanf_s("%i", y);
+}
+
+/*
+ * Proceso
+ */
+int proceso(float a, int b){
+    int longitudDecimal = tamanoDec(a), longitudEntera = tamanoEnt((int) a);
+    return ((longitudDecimal + longitudEntera) < b) ? (b - (longitudDecimal + longitudEntera)) : 0;
+}
+
+/*
+ * Salidas
+ */
+void salidas(float x, int hayMenores){
+    if(hayMenores){
+        imprimir(x);
+        for (int i = 0; i < hayMenores; i++){
+            printf("*");
+        }
+    }
+}
+
+
+/*
+ * Imprime dependiendo de la cantidad de decimales
+ */
+void imprimir(float x){
+    int decimales = tamanoDec(x);
+    switch (decimales){
+        case 1:
+            printf("%.1f", x);
+            break;
+        case 2:
+            printf("%.2f", x);
+            break;
+        case 3:
+            printf("%.3f", x);
+            break;
+        case 4:
+            printf("%.4f", x);
+            break;
+        case 5:
+            printf("%.5f", x);
+            break;
+        case 6:
+            printf("%.6f", x);
+            break;
+        case 7:
+            printf("%.7f", x);
+            break;
+        default:
+            printf("%.8f", x);
+            break;
+    }
+}
+
+
+/*
+ *  tamaño de nuestro decimal
+ */
+int tamanoDec(float a){
+    float num = a - (int) a;
+    int cantidad = 0;
+    for (int i = 0; i < 7; ++i) {
+        num *= 10;
+        //Cuando tienden a infinitos 9
+        if((int)num == 9 && (int) ((num - (int)num) * 10) == 9  ) {
+            break;
+        }
+        //cuando tienden a infinitos 0
+        if((int )num == 0 && (int) ((num - (int)num) * 10) == 0  ) {
+            if(i == 0){
+                cantidad = 1;
+            }
+
+        }
+        cantidad = cantidad + 1;
+        num = (num - (int)num); //agarro solo los decimales
+    }
+    return cantidad;
+}
+
+/*
+ * tamaño de nuestro entero
+ */
+int tamanoEnt(int b){
+    int cantidad = 0;
+    while(b != 0)
     {
-        str[i++] = (x%10) + '0';
-        x = x/10;
+        b /= 10;
+        cantidad++;
     }
-
-    while (i < d){
-        str[i++] = '0';
-    }
-
-    reversa(str, i);
-    str[i] = '\0';
-    return i;
+    return cantidad;
 }
-
-/**
- * Proceso para convertir float a char
- * @params: float del valor, apuntador del char que contendra el string y la precision de decimales que tendra.
- */
-void floatToString(float n, char *res, int precision)
-{
-    int parteEntera = (int)n; //parte entera
-    float parteFloat = n - (float)parteEntera; //parte decimal
-
-    int i = enteroString(parteEntera, res, 0);
-
-    if (precision != 0)
-    {
-        res[i] = '.';
-        parteFloat = parteFloat * elevar(10, precision);
-        enteroString((int)parteFloat, res + i + 1, precision);
-    }
-}
-
-/**
- * Saca eleva la base a x
- * @params int con la base y int x la potencia a la que se elevara
- */
-int elevar(int base, int x)
-{
-    if (x != 0)
-        return (base*elevar(base, x-1));
-    else
-        return 1;
-}
-
-/**
- * cambia la orientacion del numero
- * @param char* apuntador del string alamacenador, int longitud el tamaño de nuestro String invertido
- */
-void reversa(char *string, int longitud)
-{
-    int i=0, j=longitud-1, temp;
-    while (i<j)
-    {
-        temp = string[i];
-        string[i] = string[j];
-        string[j] = temp;
-        i++; j--;
-    }
-}
-
-

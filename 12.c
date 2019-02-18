@@ -1,60 +1,53 @@
 /**
- * @author: Luis Gerardo Leon Ortega | ejercicio 32
- * Entrada: Dos años
- * Salida general: Los años biciestos comprendidos entre ellos
+ * @author: Luis Gerardo Leon Ortega | ejercicio 52
+ * Entrada:  valor futuro, valor presente invertido, tasa de interés expresada como fracción decimal y número de períodos de inversión
+ * Salida general:  el valor futuro de la inversión.
  * Proceso general:
- *  - calcula la diferencia de años y en un for al mas pequeño se le suma 1 hasta llegar al mas grande
- *  - si el año es divisible por 4 y no es divisible por 100 o el numero es divisible por 400 es biciesto
+ *  - se calcula F = P ( 1 + i / 100 ) n y acaba el programa cuando se escribe un 0
  */
 #include <stdio.h>
 
-void entradas(int*, int*);
-void proceso(int*, int*);
-void salidas(int);
+void entradas(float*, float*, float*);
+void proceso(float*, float*, float*, float*);
+void salidas(float, int*);
 
 int main() {
-    /* entradas */
-    int x,y;
-    entradas(&x, &y);
-    /* proceso */
-    proceso(&x, &y);
-    /* salidas */
-    salidas(x, y);
-
+    float x, y, z, inversion;
+    int salida = 1;
+    while (salida){
+        /* entradas */
+        entradas(&x, &y, &z);
+        /* proceso */
+        proceso(&inversion, &x, &y, &z);
+        /* salidas */
+        salidas(inversion, &salida);
+    }
+    return 0;
 }
-
 /*
  * Entradas
  */
-void entradas(int* x, int* y){
-    printf("Ingresa el primer año");
-    scanf("%i", x);
-    printf("Ingresa el segundo año");
-    scanf("%i", y);
+void entradas(float* x, float* y, float* z){
+    printf("Ingresa una cantidad de dinero \n");
+    scanf("%f", x);
+    printf("Ingresa el PORCENTAJE de interes al que sera sometida tu inversion \n");
+    scanf("%f", y);
+    printf("Por cuantos meses \n");
+    scanf("%f", z);
 }
 
 /*
  * Proceso
  */
-void proceso(int* x, int* y){
-    int temp;
-    if(*x < *y){
-        temp = *x; *x = *y; *y = temp;
-    }
-    temp = 0;
-    for (int i = 1; i < (*x-*y); ++i) {
-        if( ((*y+i)%4 == 0 && (*y+i)%100 != 100) || ((*y+i)%400 == 0)){
-            temp++;
-        }
-    }
-    *x = temp;
+void proceso(float* inversion, float* x, float* y, float* z){
+    *inversion = (*x)*((1 + *y)/ 100)*(*z);
 }
 
 /*
- * salidas
+ * Salidas
  */
-void salidas(int x){
-    printf("Cantidad de años biciesto entre ellos %i", x);
+void salidas(float inversion, int* salida){
+    printf("La inversion a futuro sera: %f \n", inversion);
+    printf("¿Desea continuar calculado inversiones a futuro? presione 1 para si, y 0 para no \n");
+    scanf("%i", salida);
 }
-
-
