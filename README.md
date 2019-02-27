@@ -17,3 +17,4 @@
 - #15 ACM problem (Lunar New Year is approaching)
 - #16 Write a program that receives a number and tells you if that number is even or odd
 - #17 Calculate all three-digit numbers such that the sum of the cubes of the digits is equal to the number.
+- #18 Write the program that estimates the value of the mathematical constant e, by the formula: e = 1 + 1/1! + 1/2! + 1/3! + .... + 1 / N! Read the N value that indicates the precision with which you want to obtain the value of e.
