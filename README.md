@@ -15,3 +15,5 @@
 - #13 An Binary to integer decimal convertion
 - #14 Calculate cos(x) in radians
 - #15 ACM problem (Lunar New Year is approaching)
+- #16 Write a program that receives a number and tells you if that number is even or odd
+- #17 Calculate all three-digit numbers such that the sum of the cubes of the digits is equal to the number.
