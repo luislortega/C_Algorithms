@@ -21,3 +21,4 @@
 - #19 Write the program that read numeric ID, age and salary of 10 people and, to determine how many over 35 years of age earned salaries, included between $ 5000.00 and $ 7500.00 inclusive.
 - #20 Sum two fractions
 - #21 Get two times and send the seconds between both
+- #22 Make arithmetic operations from String(char) BASICS
