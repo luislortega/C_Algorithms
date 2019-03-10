@@ -23,3 +23,6 @@
 - #21 Get two times and send the seconds between both
 - #22 Make arithmetic operations from String(char) BASICS
 - #23 Make arithmetic operations from String(char) WITH OPERATION NESTED INSIDE BRACKETS
+- #24 Fill a vector V with 0's and 1's (50 times)
+- #25 Example of how insert words inside avector
+- #25 Insert 20 names and search by index of array "people"  
