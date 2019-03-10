@@ -25,4 +25,6 @@
 - #23 Make arithmetic operations from String(char) WITH OPERATION NESTED INSIDE BRACKETS
 - #24 Fill a vector V with 0's and 1's (50 times)
 - #25 Example of how insert words inside avector
-- #25 Insert 20 names and search by index of array "people"  
+- #26 Insert 20 names and search by index of array "people"  
+- #27 Make the sum of two vector b[i,j] = a[i,j] + b[i,j]  
+- #28 Program that completes a full-size vector with random numbers of 0 At 100. the program must calculate: the average of the data, the standard deviation, the variance
