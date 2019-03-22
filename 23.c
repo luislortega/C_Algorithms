@@ -1,9 +1,6 @@
-/**
+/*!
  * @author Luis Ortega
- *
- *  FUCNIONA DE FORMA RECURSIVA PARA LOS OBJETOS ANIDADOS DE FORMA (A+B*(B-A*(A-B)))
- *
- * #NOEXAMENPARCIAL
+ * hace operaciones aritmeticas con cadenas char
  */
 #include <stdio.h>
 
@@ -12,104 +9,90 @@ void entradas();
 float evaluar();
 void salidas(float);
 
+/*!
+ * Funcion main
+ * @return 0
+ */
 int main(){
-    /* entradas */
     entradas();
-    /* proceso */
     float resultado = evaluar();
-    /* salidas */
     salidas(resultado);
     return 0;
 }
 
-/**
- * Entradas
+/*!
+ * Entrada de valores
  */
 void entradas(){
     printf("Ingresa una operacion aritmetica");
     scanf("%s", stringOperando);
 }
 
-/**
- * Operacion profunda
- * @return profundidad de la anidacion || valor anidado || valor negativo en caos de serlo
+/*!
+ * Obtiene el numero a evaluar, si es una operacion anidada o es una operacion iniciada como negativo
+ * @return profundidad de la anidacion || operaciones profundad || valor negativo en caos de serlo
  */
-float operacion(){
+float obtenerValores(){
     if (*stringOperando >= '0' && *stringOperando <= '9'){
-        int operando = *stringOperando++-'0';
+        int numero = *stringOperando++-'0';
         while (*stringOperando >= '0' && *stringOperando <= '9'){
-            operando= 10 * operando+ *stringOperando++ - '0';
+            numero = 10 * numero + *stringOperando++ - '0';
+            printf("Concatenando los valores: %i \n", numero);
         }
-        return operando; //Si se puede evaluar los valores para ser evaluados
+        printf("Valor numerico: %i \n", numero);
+        return numero; //59
     }
     else if (*stringOperando == '('){
-        /*
-         * Extraemos los valores adentro de los corchetes '( A+B )'
-         */
         stringOperando++;
-        float anidado= evaluar();
+        float aritmeticaxProfundidad = evaluar(); //Operaciones profundas
         stringOperando++;
-        return anidado;
+        printf("Valores dentro de la profundidad: %f \n", aritmeticaxProfundidad);
+        return aritmeticaxProfundidad;
     }
     else if (*stringOperando == '-'){
-        /*
-         * Retornamos el valor negativo
-         */
         stringOperando++;
-        return -operacion();
+        printf("Valor negativo devuelto: %f \n", -obtenerValores());
+        return -obtenerValores();
     }
-    /*
-     * En caso de que ya no hayan operaciones
-     */
+    // ya no tenemos que evaluar
     return 0;
 }
 
-/**
- * Hace las operaciones de primer rango
- * @return nuestra operacion de primer rango
+/*!
+ * Hace las operaciones de prioridad
+ * @return nuestra operacion de prioridad
  */
-float primerRango(){
-    //Sacamos el char a evaluar, podria ser un numero 0..9, valores anidados entre parentesis o un numero negatico
-    float primerRango = operacion();
+float prioridad(){
+    float valor = obtenerValores();
+    /*!
+     * Es un while para ir comprobando signos continuos
+     */
     while (*stringOperando== '*' || *stringOperando == '/'){
-        /*
-         * Cuando se hace una operacion basica igual se revisa que su operacion no contenga una operacion
-         * de mayor rango
-         *
-         * EJEMPLO:
-         *
-         * 5*(2*2) || 5 / (2+3)
-         */
-        primerRango = (*stringOperando++ == '*')? primerRango * operacion() : primerRango / operacion();
+        valor = (*stringOperando++ == '*')? valor * obtenerValores() : valor / obtenerValores();
     }
-    return primerRango;
+    return valor;
 }
 
-/**
- * Evalua nuestra operacion aritmetica
- * @return resultado de la operacion aritmetica
+/*!
+ * Evalua una expresion aritmetica en String
+ * @return resultado de la operacion
  */
 float evaluar(){
-    /*
-     * Revisamos si nuestra operacion tiene una operacion de primer rango
-     * que serian la multiplicacion o division.
+    float resultado = prioridad();
+    printf("Prioridad: %f \n", resultado);
+    /*!
+     * Es un while para ir comprobando signos continuos
      */
-    float resultado = primerRango();
-    //Mientras ya no tengamos operaciones aritmeticas basicas.
     while (*stringOperando == '+' || *stringOperando == '-'){
-        /*
-         * Cuando se hace una operacion basica igual se revisa que su operacion no contenga una operacion
-         * de mayor rango
-         *
-         * EJEMPLO:
-         *
-         * 5+(2*2) || 5 - (2+3)
-         */
-        resultado = (*stringOperando++ == '+')? resultado + primerRango(): resultado - primerRango();
+        resultado = (*stringOperando++ == '+') ? resultado + prioridad(): resultado - prioridad();
     }
     return resultado;
 }
 
+/*!
+ * Imprime el resultado
+ * @param resultado
+ */
 void salidas(float resultado){
     printf("Resultado %f", resultado);
 }

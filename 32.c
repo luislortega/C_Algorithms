@@ -62,7 +62,7 @@ int main(){
             printf("El resultado es %i", resultado);
             break;
         case 5:
-            printf("Ingresa el tamaño de sus dos vector \n");
+            printf("Ingresa el tamaño de su vector \n");
             scanf("%i", &numero1);
 
             for (int i = 0; i < numero1; ++i) {
@@ -150,5 +150,5 @@ int busquedaBinariaRecursiva(int arreglo[], int busqueda, int izquierda, int der
 }
 
 int solucionDeRecurrencia(int n, int base1, int base2){
-    return (n == base1) ? base1 : ( n == base2) ? base2 : 5*solucionDeRecurrencia(n-1, base1, base2) - 4*solucionDeRecurrencia(n-2, base1, base2);
+    return (n == 0) ? base1 : ( n == 1) ? base2 : 5*solucionDeRecurrencia(n-1, base1, base2) + (-4)*solucionDeRecurrencia(n-2, base1, base2);
 }
