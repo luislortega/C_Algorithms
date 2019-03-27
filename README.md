@@ -32,3 +32,5 @@
 - #30 It has a vector of one hundred elements that represent qualifications of five subjects of 20 students. From 1 to 5 are the grades of the first student; from 6 to 10, are the second; and so on. You want a program that reads these qualifications and calculates the average of each student and that he keeps it in a second vector that will have as Only the averages of the 20 students.
 - #31 Print a triangle with n x n matrix
 - #32 Seven problems of recursivity 
+- #33 Calculate a matrix's inverse
+- #34 Experiments with paragraphs with chars
