@@ -7,6 +7,7 @@ int main(){
     for (int i = 0; i < 10 ;i++){
         scanf("%100s", variable[i]);
     }
+    
     for (int j = 0; j < 10; ++j) {
         printf("\n %s",variable[j]);
     }
