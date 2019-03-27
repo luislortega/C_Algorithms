@@ -34,3 +34,5 @@
 - #32 Seven problems of recursivity 
 - #33 Calculate a matrix's inverse
 - #34 Experiments with paragraphs with chars
+- #35 Search the modes
+- #36 Print a triangle of Stars
