@@ -37,3 +37,4 @@
 - #35 Search the modes
 - #36 Print a triangle of Stars
 - #37 Struct (object) BASIC
+- #38 The basics of a REALLY SIMPLE Linked list
