@@ -19,8 +19,12 @@ typedef struct {
 
 void initArrayList(ArrayList*);
 int returnOptions();
+
 void insertInArrayList(ArrayList*);
+void searchInArrayList(ArrayList*);
+
 Item* createItem();
+Item* searchItemById(ArrayList*, int);
 
 int main(){
     ArrayList lista;
@@ -30,6 +34,12 @@ int main(){
         switch (returnOptions()){
             case 1:
                 insertInArrayList(&lista);
+                break;
+            case 2:
+                searchInArrayList(&lista);
+                break;
+            case 3:
+                //updateInArrayList(&lista);
                 break;
             default:
                 printf("Exit...");
@@ -52,6 +62,8 @@ int returnOptions(){
     printf(":- CRUD MENU -:. \n");
     printf("1) Create an element. \n");
     printf("2) Read an element. \n");
+    printf("3) Update an element. \n");
+    printf("4) Delete an element. \n");
     printf("7) Crash the program. \n");
     scanf("%i", &option);
     return option;
@@ -65,6 +77,24 @@ void insertInArrayList(ArrayList *arrayList){
     }else{
         printf("Ya no hay mas espacio. \n");
     }
+}
+void searchInArrayList(ArrayList *arrayList){
+    int idToSearch;
+    printf("Ingresa el id del producto que buscas:\n");
+    scanf("%d", &idToSearch);
+    Item* item = searchItemById(arrayList, idToSearch);
+    (item) ? printf("Item properties: \n Id: %i \n precio: %i \n cantidad: %i \n", item->id, item->precio, item->cantidad) : printf("This item does not exist \n");
+
+};
+
+Item* searchItemById(ArrayList *arrayList, int idToSearch){
+    Item* item = NULL;
+    for (int i = 0; i < arrayList->size; ++i) {
+        if(arrayList->items[i]->id == idToSearch){
+            item = arrayList->items[i];
+        }
+    }
+    return item;
 }
 
 Item* createItem(){
