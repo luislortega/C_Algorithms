@@ -18,22 +18,27 @@ typedef struct {
     int size;
 } ArrayList;
 
-
+//Initial State
 void initArrayList(ArrayList*);
 int returnOptions();
 
+//Crud
 void insertInArrayList(ArrayList*);
 void searchInArrayList(ArrayList*);
 void updateInArrayList(ArrayList*);
 void deleteInArrayList(ArrayList*);
 
+//Sorts
+void bubbleSort(ArrayList*);
+void selectionSort(ArrayList*);
+
+//Item manipulation
 Item* createItem();
 Item* searchItemById(ArrayList*, int);
 
 int main(){
     ArrayList lista;
     initArrayList(&lista);
-
     while(1){
         switch (returnOptions()){
             case 1:
@@ -47,6 +52,12 @@ int main(){
                 break;
             case 4:
                 deleteInArrayList(&lista);
+                break;
+            case 5:
+                bubbleSort(&lista);
+                break;
+            case 6:
+                //selectionSort(&lista);
                 break;
             default:
                 printf("Exit...");
@@ -71,7 +82,9 @@ int returnOptions(){
     printf("2) Read an element. \n");
     printf("3) Update an element. \n");
     printf("4) Delete an element. \n");
-    printf("other) Crash the program. \n");
+    printf("5) Bubble sort. \n ");
+    printf("6) Selection sort. \n");
+    printf("7) Crash the program. \n");
     scanf("%i", &option);
     return option;
 }
@@ -129,6 +142,18 @@ void deleteInArrayList(ArrayList *arrayList){
         printf("No existe ese item. \n");
     }
 }
+
+void bubbleSort(ArrayList *arrayList){
+    /**
+     * Algoritmo:
+     *
+     * 1. Comprobar que todos los ITEM esten inicializados y no en Null.
+     * 2. Meter en un bucle que recorre hasta el tamaño n-1 del vector de apuntadores.
+     * 3. Si el elemento < siguienteElemento (compareTo) hacerle un swap.
+     */
+    printf("Do something");
+}
+
 
 Item* searchItemById(ArrayList *arrayList, int idToSearch){
     Item* item = NULL;
