@@ -38,3 +38,4 @@
 - #36 Print a triangle of Stars
 - #37 Struct (object) BASIC
 - #38 The basics of a REALLY SIMPLE Linked list
+- #39 The basic of Dynamic ArrayList
