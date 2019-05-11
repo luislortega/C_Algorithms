@@ -22,6 +22,8 @@ int returnOptions();
 
 void insertInArrayList(ArrayList*);
 void searchInArrayList(ArrayList*);
+void updateInArrayList(ArrayList*);
+void deleteInArrayList(ArrayList*);
 
 Item* createItem();
 Item* searchItemById(ArrayList*, int);
@@ -39,7 +41,10 @@ int main(){
                 searchInArrayList(&lista);
                 break;
             case 3:
-                //updateInArrayList(&lista);
+                updateInArrayList(&lista);
+                break;
+            case 4:
+                deleteInArrayList(&lista);
                 break;
             default:
                 printf("Exit...");
@@ -84,8 +89,53 @@ void searchInArrayList(ArrayList *arrayList){
     scanf("%d", &idToSearch);
     Item* item = searchItemById(arrayList, idToSearch);
     (item) ? printf("Item properties: \n Id: %i \n precio: %i \n cantidad: %i \n", item->id, item->precio, item->cantidad) : printf("This item does not exist \n");
-
 };
+
+
+void updateInArrayList(ArrayList *arrayList){
+    int idToSearch;
+    printf("Ingresa el id del producto que actualizaras:\n");
+    scanf("%d", &idToSearch);
+    if (searchItemById(arrayList, idToSearch)){
+        Item* newItem = createItem();
+        arrayList->items[idToSearch-1] = newItem;
+        printf("Datos del item actualizados. \n");
+    }else{
+        printf("No existe ese item. \n");
+    }
+}
+
+void deleteInArrayList(ArrayList *arrayList){
+    int idToSearch;
+    printf("Ingresa el id del producto que borraras:\n");
+    scanf("%d", &idToSearch);
+    
+    Item* item = searchItemById(arrayList, idToSearch);
+    
+    if (item){
+        
+    }else{
+        printf("No existe ese item. \n");
+    }
+    
+    /*int flag = 0;
+    int target = searchID(content);
+    if(target!=-1){
+        free(*(content.array+target));
+        printf("The item has been erased.\n");
+        if(target!=content.maxSize-1){
+            while(target!=content.counter){
+                (*(content.array+target))->ID = (*(content.array+target+1))->ID;
+                (*(content.array+target))->quantity = (*(content.array+target+1))->quantity;
+                (*(content.array+target))->price = (*(content.array+target+1))->price;
+                target = target + 1;
+            }
+            free(*(content.array+target));
+        }
+        flag = 1;
+    }
+    return flag; */
+}
 
 Item* searchItemById(ArrayList *arrayList, int idToSearch){
     Item* item = NULL;
@@ -99,6 +149,7 @@ Item* searchItemById(ArrayList *arrayList, int idToSearch){
 
 Item* createItem(){
     Item* item = (Item*)malloc(sizeof(Item));
+    /* agrega una comprobacion que no se repita el mismo id */
     printf("Ingresa el id. \n");
     scanf("%i", &item->id);
     printf("Ingresa el precio. \n");
