@@ -1,3 +1,10 @@
+/**
+ * f you need a dynamic array, you can't escape pointers. Why are you afraid though? They won't bite (as long as you're careful, that is).
+ * There's no built-in dynamic array in C, you'll just have to write one yourself. In C++, you can use the built-in std::vector class.
+ * C# and just about every other high-level language also have some similar class that manages dynamic arrays for you.
+ * If you do plan to write your own, here's something to get you started: most dynamic array implementations work by starting off with an array of some (small) default size, then whenever you run out of space when adding a new element, double the size of the array.
+ * As you can see in the example below, it's not very difficult at all: (I've omitted safety checks for brevity)
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -28,10 +35,6 @@ void freeArray(Array *a) {
     a->array = NULL;
     a->used = a->size = 0;
 }
-struct ArrayList{
-    int counter;
-    int maxSize;
-};
 
 int main(){
     Array a;
