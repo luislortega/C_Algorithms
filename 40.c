@@ -1,78 +1,79 @@
 /**
  * @author Luis Gerardo Leon Ortega
- *
- * CRUD:
- * [x] CREATE
- * [x] READ
- * [x] UPDATE
- * [ ] DELETE
  */
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef struct {
-    int *element; //This is the link for the item.
-    size_t used;
-    size_t size;
+    int id;
+    int precio;
+    int cantidad;
+} Item;
+
+typedef struct {
+    Item **items;
+    int used;
+    int size;
 } ArrayList;
 
-void initArrayList(ArrayList*, size_t);
-void insertInArrayList(ArrayList*, int);
-void updateInArrayList(ArrayList*, int, int);
-void deleteInArrayList(ArrayList*, int, size_t);
+
+void initArrayList(ArrayList*);
+int returnOptions();
+void insertInArrayList(ArrayList*);
+Item* createItem();
 
 int main(){
     ArrayList lista;
-    initArrayList(&lista, 4);
-    //elements...
-    insertInArrayList(&lista, 1);
-    insertInArrayList(&lista, 2);
-    insertInArrayList(&lista, 3);
-    insertInArrayList(&lista, 4);
-    //Update
-    updateInArrayList(&lista, 2, 202); //Position - 1
-    //Delete
-    deleteInArrayList(&lista, 2, lista.used); //Position - 1
-    //Prints
-    for (int i = 0; i < lista.size; ++i) {
-        printf("%d\n", lista.element[i]);
+    initArrayList(&lista);
+
+    while(1){
+        switch (returnOptions()){
+            case 1:
+                insertInArrayList(&lista);
+                break;
+            default:
+                printf("Exit...");
+                exit(0);
+        }
     }
 }
 
-void initArrayList(ArrayList *arrayList, size_t initialSize) {
-    arrayList->element = (int *)malloc(initialSize * sizeof(int)); //Reserva el espacio en memoria para el elemento tipo int
+void initArrayList(ArrayList *arrayList) {
+    int initialSize;
+    printf("¿Cual sera el tamano de su ArrayList?");
+    scanf("%i", &initialSize);
+    arrayList->items = (Item**)malloc(initialSize * sizeof(Item**));
     arrayList->used = 0;
     arrayList->size = initialSize;
 }
 
-void insertInArrayList(ArrayList *arrayList, int element) {
-    if (arrayList->used == arrayList->size) {
-        arrayList->size *= 2;
-        arrayList->element = (int *)realloc(arrayList->element, arrayList->size * sizeof(int));
-    }
-    arrayList->element[arrayList->used++] = element;
+int returnOptions(){
+    int option;
+    printf(":- CRUD MENU -:. \n");
+    printf("1) Create an element. \n");
+    printf("2) Read an element. \n");
+    printf("7) Crash the program. \n");
+    scanf("%i", &option);
+    return option;
 }
 
-void updateInArrayList(ArrayList *arrayList, int posicion, int nuevo_elemento){
-    arrayList->element[posicion] = nuevo_elemento;
-}
-
-void deleteInArrayList(ArrayList *arrayList, int posicion, size_t tamano){
-    /**
-     * Algoritmo:
-     *
-     * Agarrar el tamaño del vector y desde el elemento que se va a eliminar hasta el tamaño total del arrayList menos 1.
-     *
-     * dentro del bucle, recorrer la informacion de el siguiente al anterior.
-     *
-     * al finalizar el proceso, simplemente actualizar el tamaño total del arrayList
-     */
-    if(posicion == tamano){
-        printf("Estas tratando de borrar el final de la lista.");
+void insertInArrayList(ArrayList *arrayList){
+    if(arrayList->used < arrayList->size){
+        *(arrayList->items+arrayList->used) = createItem();
+        arrayList->used++;
+        printf("Item agregado. \n");
     }else{
-        for (int i = posicion; i < tamano-1; ++i) {
-            arrayList->element[i] = arrayList->element[i+1];
-        }
-        arrayList->size = arrayList->size - 1;
+        printf("Ya no hay mas espacio. \n");
     }
+}
+
+Item* createItem(){
+    Item* item = (Item*)malloc(sizeof(Item));
+    printf("Ingresa el id. \n");
+    scanf("%i", &item->id);
+    printf("Ingresa el precio. \n");
+    scanf("%i", &item->precio);
+    printf("Ingresa la cantidad. \n");
+    scanf("%i", &item->cantidad);
+    return item;
 }
