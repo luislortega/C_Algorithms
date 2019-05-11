@@ -1,5 +1,7 @@
 /**
  * @author Luis Gerardo Leon Ortega
+ *
+ * EL PROYECTO SUPONE QUE INGRESAS TODOS LOS ITEMS AL INICIO.
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -69,7 +71,7 @@ int returnOptions(){
     printf("2) Read an element. \n");
     printf("3) Update an element. \n");
     printf("4) Delete an element. \n");
-    printf("7) Crash the program. \n");
+    printf("other) Crash the program. \n");
     scanf("%i", &option);
     return option;
 }
@@ -109,38 +111,29 @@ void deleteInArrayList(ArrayList *arrayList){
     int idToSearch;
     printf("Ingresa el id del producto que borraras:\n");
     scanf("%d", &idToSearch);
-    
-    Item* item = searchItemById(arrayList, idToSearch);
-    
-    if (item){
-        
+    if (searchItemById(arrayList, idToSearch)){
+        if(idToSearch != arrayList->size){
+            for (int i = idToSearch; i < arrayList->size; ++i) {
+                if(i == arrayList->size-1){
+                    arrayList->items[i] = NULL;
+                }else{
+                    arrayList->items[i-1] = arrayList->items[i];
+                }
+            }
+        }else{
+            free(arrayList->items[idToSearch-1]);
+        }
+        arrayList->used--;
+        printf("El item ha sido eliminado. \n");
     }else{
         printf("No existe ese item. \n");
     }
-    
-    /*int flag = 0;
-    int target = searchID(content);
-    if(target!=-1){
-        free(*(content.array+target));
-        printf("The item has been erased.\n");
-        if(target!=content.maxSize-1){
-            while(target!=content.counter){
-                (*(content.array+target))->ID = (*(content.array+target+1))->ID;
-                (*(content.array+target))->quantity = (*(content.array+target+1))->quantity;
-                (*(content.array+target))->price = (*(content.array+target+1))->price;
-                target = target + 1;
-            }
-            free(*(content.array+target));
-        }
-        flag = 1;
-    }
-    return flag; */
 }
 
 Item* searchItemById(ArrayList *arrayList, int idToSearch){
     Item* item = NULL;
     for (int i = 0; i < arrayList->size; ++i) {
-        if(arrayList->items[i]->id == idToSearch){
+        if((i+1) == idToSearch){
             item = arrayList->items[i];
         }
     }
