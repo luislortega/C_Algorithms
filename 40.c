@@ -1,11 +1,6 @@
 /**
- * @author Luis Gerardo Leon Ortega
- *
- * EL PROYECTO SUPONE QUE INGRESAS TODOS LOS ITEMS AL INICIO.
- * ¿Como arreglar esto? simplemente hacer una comprobacion los items usados y el tamaño establecido.
- * Razon para no hacerlo: Con la funcionalidad basica esta bien.
- *
- */
+* Mi progrma implica que se añadiran todos los items hasta que diga que "No hay mas espacio"
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -64,7 +59,7 @@ int main(){
                 bubbleSort(&lista);
                 break;
             case 6:
-                //selectionSort(&lista);
+                selectionSort(&lista);
                 break;
             default:
                 printf("Exit...");
@@ -98,13 +93,14 @@ int returnOptions(){
 
 void insertInArrayList(ArrayList *arrayList){
     if(arrayList->used < arrayList->size){
-        *(arrayList->items+arrayList->used) = createItem();
+        arrayList->items[arrayList->used] = createItem();
         arrayList->used++;
         printf("Item agregado. \n");
     }else{
         printf("Ya no hay mas espacio. \n");
     }
 }
+
 void searchInArrayList(ArrayList *arrayList){
     int idToSearch;
     printf("Ingresa el id del producto que buscas:\n");
@@ -164,14 +160,30 @@ void bubbleSort(ArrayList *arrayList){
      }
 }
 
+
+void selectionSort(ArrayList *arrayList){
+    int min_id;
+    if(arrayList->used == arrayList->size){
+        for (int i = 0; i < arrayList->size-1; ++i) {
+            min_id = i;
+            for (int j = i+1; j < arrayList->size; ++j) {
+                if(!compareTo(arrayList->items[j],arrayList->items[min_id])){
+                    min_id = j;
+                }
+            }
+            swap(arrayList->items[min_id], arrayList->items[i]);
+        }
+    }else{
+        printf("Tienes Items NULL amiguito. \n");
+    }
+}
+
 int compareTo(Item *item1, Item*item2){
     return (item1->id > item2->id) ? 1 : 0;
 }
 
 void swap(Item* ahead, Item* behind){
-    Item temp = *ahead;
-    *ahead = *behind;
-    *behind = temp;
+    Item temp = *ahead; *ahead = *behind; *behind = temp;
 }
 
 Item* searchItemById(ArrayList *arrayList, int idToSearch){
