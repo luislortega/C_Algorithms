@@ -39,4 +39,4 @@
 - #37 Struct (object) BASIC
 - #38 The basics of a REALLY SIMPLE Linked list
 - #39 The basic of Dynamic ArrayList
-- #40 Basic CRUD with C
+- #40 Basic CRUD with C with two bubbleSort and selectionSort
