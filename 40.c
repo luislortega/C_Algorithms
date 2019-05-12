@@ -2,6 +2,9 @@
  * @author Luis Gerardo Leon Ortega
  *
  * EL PROYECTO SUPONE QUE INGRESAS TODOS LOS ITEMS AL INICIO.
+ * ¿Como arreglar esto? simplemente hacer una comprobacion los items usados y el tamaño establecido.
+ * Razon para no hacerlo: Con la funcionalidad basica esta bien.
+ *
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,6 +38,7 @@ void selectionSort(ArrayList*);
 //Item manipulation
 Item* createItem();
 Item* searchItemById(ArrayList*, int);
+int searchNullItem(ArrayList*);
 
 int main(){
     ArrayList lista;
@@ -126,7 +130,7 @@ void deleteInArrayList(ArrayList *arrayList){
     scanf("%d", &idToSearch);
     if (searchItemById(arrayList, idToSearch)){
         if(idToSearch != arrayList->size){
-            for (int i = idToSearch; i < arrayList->size; ++i) {
+            for (int i = idToSearch; i <= arrayList->size; ++i) {
                 if(i == arrayList->size-1){
                     arrayList->items[i] = NULL;
                 }else{
@@ -151,7 +155,20 @@ void bubbleSort(ArrayList *arrayList){
      * 2. Meter en un bucle que recorre hasta el tamaño n-1 del vector de apuntadores.
      * 3. Si el elemento < siguienteElemento (compareTo) hacerle un swap.
      */
-    printf("Do something");
+     if(arrayList->used == arrayList->size){
+         for (int j = 0; j < arrayList->size-1; ++j) {
+             for (int i = 0; i < arrayList->size-j-1; ++i) {
+                 /* Implement compareTo and swap */
+                 if (arrayList->items[i]->id > arrayList->items[i+1]->id){
+                     Item* temp = arrayList->items[i];
+                     arrayList->items[i] = arrayList->items[i+1];
+                     arrayList->items[i+1] = temp;
+                 }
+             }
+         }
+     }else{
+         printf("Tienes Items NULL amiguito. \n");
+     }
 }
 
 
