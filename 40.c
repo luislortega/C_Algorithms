@@ -35,10 +35,13 @@ void deleteInArrayList(ArrayList*);
 void bubbleSort(ArrayList*);
 void selectionSort(ArrayList*);
 
+//Basic function in sort.
+int compareTo(Item*, Item*);
+void swap(Item*, Item*);
+
 //Item manipulation
 Item* createItem();
 Item* searchItemById(ArrayList*, int);
-int searchNullItem(ArrayList*);
 
 int main(){
     ArrayList lista;
@@ -148,21 +151,11 @@ void deleteInArrayList(ArrayList *arrayList){
 }
 
 void bubbleSort(ArrayList *arrayList){
-    /**
-     * Algoritmo:
-     *
-     * 1. Comprobar que todos los ITEM esten inicializados y no en Null.
-     * 2. Meter en un bucle que recorre hasta el tamaño n-1 del vector de apuntadores.
-     * 3. Si el elemento < siguienteElemento (compareTo) hacerle un swap.
-     */
      if(arrayList->used == arrayList->size){
          for (int j = 0; j < arrayList->size-1; ++j) {
              for (int i = 0; i < arrayList->size-j-1; ++i) {
-                 /* Implement compareTo and swap */
-                 if (arrayList->items[i]->id > arrayList->items[i+1]->id){
-                     Item* temp = arrayList->items[i];
-                     arrayList->items[i] = arrayList->items[i+1];
-                     arrayList->items[i+1] = temp;
+                 if (compareTo(arrayList->items[i], arrayList->items[i+1])){
+                     swap(arrayList->items[i],  arrayList->items[i+1]);
                  }
              }
          }
@@ -171,6 +164,15 @@ void bubbleSort(ArrayList *arrayList){
      }
 }
 
+int compareTo(Item *item1, Item*item2){
+    return (item1->id > item2->id) ? 1 : 0;
+}
+
+void swap(Item* ahead, Item* behind){
+    Item temp = *ahead;
+    *ahead = *behind;
+    *behind = temp;
+}
 
 Item* searchItemById(ArrayList *arrayList, int idToSearch){
     Item* item = NULL;
