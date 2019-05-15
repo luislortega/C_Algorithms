@@ -8,24 +8,36 @@ typedef struct {
 } Item;
 
 typedef struct{
-    Item **item;
-    struct Node **next;
+    Item *item;
+    struct Node *next;
 } Node;
 
 typedef struct {
-    Node **node;
+    Node *node;
 } LinkedList;
 
+/* Initial State */
 void initLinkedList(LinkedList*);
 int getOptions();
 
+/* CRUD */
+void createItem(LinkedList*);
+void readItem(LinkedList*);
+void updateItem(LinkedList*);
+void deleteItem(LinkedList*);
+
+/* Item manipulation */
+Item* swap(Item*, Item*);
+Item* compareTo(Item*, Item*); //Make the real compareTo...
+void createNode(Node*);
+
 int main(){
-    LinkedList list;
-    initLinkedList(&list);
+    LinkedList linkedList;
+    initLinkedList(&linkedList);
     while(1){
         switch(getOptions()){
             case 1:
-                printf("Do something");
+                createItem(&linkedList);
                 break;
             case 2:
                 printf("Do something");
@@ -44,7 +56,9 @@ int main(){
         }
     }
 }
-
+/**
+ * Initial state
+ */
 void initLinkedList(LinkedList *linkedList){
     linkedList->node = NULL;
 }
@@ -61,4 +75,25 @@ int getOptions(){
     printf("*******************************************\n");
     scanf("%i", &option);
     return option;
+}
+
+/**
+* CRUD
+*/
+void createItem(LinkedList *linkedList){
+    Node *node = (Node*)malloc(sizeof(Node));
+    createNode(node);
+}
+
+/**
+* Item manipulation
+*/
+
+void createNode(Node *node){
+    printf("******************************************* \n");
+    printf("Ingresa un id para el Item: \n");
+    printf("Ingresa un precio para el Item: \n");
+    printf("Ingresa una cantidad para el Item: \n");
+    printf("******************************************* \n");
+    node->next = NULL;
 }
