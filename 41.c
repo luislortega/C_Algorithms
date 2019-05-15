@@ -1,20 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct {
+
+struct item {
     int id;
     int precio;
     int cantidad;
-} Item;
+};
 
-typedef struct{
-    Item *item;
-    struct Node *next;
-} Node;
+struct node {
+    struct item item;
+    struct node *next;
+};
 
-typedef struct {
-    Node *node;
-} LinkedList;
+struct linkedList {
+    struct node *node;
+};
+
+typedef struct item Item;
+typedef struct node Node;
+typedef struct linkedList LinkedList;
+
 
 /* Initial State */
 void initLinkedList(LinkedList*);
@@ -83,6 +89,15 @@ int getOptions(){
 void createItem(LinkedList *linkedList){
     Node *node = (Node*)malloc(sizeof(Node));
     createNode(node);
+    if (linkedList->node == NULL){
+        linkedList->node = node;
+    }else{
+        Node *loadNode = linkedList->node;
+        while (loadNode->next != NULL){
+            loadNode = loadNode->next;
+        }
+        loadNode->next = node;
+    }
 }
 
 /**
@@ -90,10 +105,13 @@ void createItem(LinkedList *linkedList){
 */
 
 void createNode(Node *node){
-    printf("******************************************* \n");
+    printf("*******************ITEM******************** \n");
     printf("Ingresa un id para el Item: \n");
+    scanf("%i", &node->item.id);
     printf("Ingresa un precio para el Item: \n");
+    scanf("%i", &node->item.precio);
     printf("Ingresa una cantidad para el Item: \n");
+    scanf("%i", &node->item.cantidad);
     printf("******************************************* \n");
     node->next = NULL;
 }

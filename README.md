@@ -40,4 +40,4 @@
 - #38 The basics of a REALLY SIMPLE Linked list
 - #39 The basic of Dynamic ArrayList
 - #40 CRUD with bubbleSort and selectionSort (ArrayList emulation)
-- #41 CRUD based on Nodes (LinkedList) 
+- #41 CRUD based on Nodes (LinkedList emulation) 
