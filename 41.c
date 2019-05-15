@@ -31,10 +31,12 @@ void createItem(LinkedList*);
 void readItem(LinkedList*);
 void updateItem(LinkedList*);
 void deleteItem(LinkedList*);
+void printAllItems(LinkedList*);
 
 /* Item manipulation */
 Item* swap(Item*, Item*);
 Item* compareTo(Item*, Item*); //Make the real compareTo...
+void printItem(struct item);
 void createNode(Node*);
 
 int main(){
@@ -55,7 +57,7 @@ int main(){
                 printf("Do something");
                 break;
             case 5:
-                printf("Do something");
+                printAllItems(&linkedList);
                 break;
             default:
                 exit(0);
@@ -77,7 +79,8 @@ int getOptions(){
     printf("[2] Read an Item \n");
     printf("[3] Update an Item \n");
     printf("[4] Delete an Item \n");
-    printf("[5] Exit \n");
+    printf("[5] Print all items \n");
+    printf("[6] Exit \n");
     printf("*******************************************\n");
     scanf("%i", &option);
     return option;
@@ -100,9 +103,24 @@ void createItem(LinkedList *linkedList){
     }
 }
 
+void printAllItems(LinkedList   *linkedList){
+    if (linkedList->node != NULL){
+        Node *loadNode = linkedList->node;
+        while (loadNode->next != NULL){
+            printItem(loadNode->item);
+            loadNode = loadNode->next;
+        }
+        printItem(loadNode->item); //Last item.
+    }
+}
+
 /**
 * Item manipulation
 */
+
+void printItem(struct item item){
+    printf("ID %i \n", item.id);
+}
 
 void createNode(Node *node){
     printf("*******************ITEM******************** \n");
