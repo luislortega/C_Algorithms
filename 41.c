@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 struct item {
     int id;
     int precio;
@@ -48,7 +47,7 @@ int main(){
                 createItem(&linkedList);
                 break;
             case 2:
-                printf("Do something");
+                readItem(&linkedList);
                 break;
             case 3:
                 printf("Do something");
@@ -103,7 +102,28 @@ void createItem(LinkedList *linkedList){
     }
 }
 
-void printAllItems(LinkedList   *linkedList){
+void readItem(LinkedList *linkedList){
+    int id_busqueda = 0;
+    printf("******************BUSCAR******************* \n");
+    printf("Ingresa el id a buscar: \n");
+    scanf("%i", &id_busqueda);
+    if (linkedList->node != NULL){
+        Node *loadNode = linkedList->node;
+        while (loadNode->next != NULL){
+            if (loadNode->item.id == id_busqueda){
+                printItem(loadNode->item);
+            }
+            loadNode = loadNode->next;
+        }
+        if (loadNode->item.id == id_busqueda){
+            printItem(loadNode->item); //Last item
+        }
+    }
+    printf("******************************************* \n");
+}
+
+void printAllItems(LinkedList *linkedList){
+    printf("******************TODOS******************* \n");
     if (linkedList->node != NULL){
         Node *loadNode = linkedList->node;
         while (loadNode->next != NULL){
@@ -112,6 +132,7 @@ void printAllItems(LinkedList   *linkedList){
         }
         printItem(loadNode->item); //Last item.
     }
+    printf("******************************************* \n");
 }
 
 /**
@@ -119,7 +140,7 @@ void printAllItems(LinkedList   *linkedList){
 */
 
 void printItem(struct item item){
-    printf("ID %i \n", item.id);
+    printf("ID: %i \n Precio: %i \n Cantidad: %i \n", item.id, item.precio, item.cantidad);
 }
 
 void createNode(Node *node){
