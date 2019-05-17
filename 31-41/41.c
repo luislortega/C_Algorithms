@@ -61,9 +61,7 @@ int main(){
         }
     }
 }
-/**
- * Initial state
- */
+
 void initLinkedList(LinkedList *linkedList){
     linkedList->node = NULL;
 }
@@ -83,9 +81,6 @@ int getOptions(){
     return option;
 }
 
-/**
-* CRUD
-*/
 void createItem(LinkedList *linkedList){
     Node *node = (Node*)malloc(sizeof(Node));
     createNode(node);
@@ -122,7 +117,6 @@ void readItem(LinkedList *linkedList){
 
 void updateItem(LinkedList *linkedList){
     printf("******************UPDATE******************* \n");
-    //printf()
     int id_busqueda = 0;
     printf("Ingresa el id del item a buscar: \n");
     scanf("%i", &id_busqueda);
@@ -152,21 +146,17 @@ void deleteItem(LinkedList *linkedList){
         Node *loadNode = linkedList->node;
         int count = 0;
         while (loadNode->next != NULL){
-
-            //Error
-            if (loadNode->item.id == id_busqueda && count == 0){
-                loadNode->item = loadNode->next->item;
-                loadNode->next = loadNode->next->next;
-            }
-
             if (loadNode->next->item.id == id_busqueda){
                 loadNode->next = loadNode->next->next;
+            }
+            if (loadNode->item.id == id_busqueda && count == 0){
+                linkedList->node = loadNode->next;
             }
             loadNode = loadNode->next;
             count += 1;
         }
         if (loadNode->item.id == id_busqueda){
-            linkedList->node = NULL; //Delete only the first item.
+            linkedList->node = NULL;
         }
     }
     printf("******************************************* \n");
@@ -184,10 +174,6 @@ void printAllItems(LinkedList *linkedList){
     }
     printf("******************************************* \n");
 }
-
-/**
-* Item manipulation
-*/
 
 void printItem(struct item item){
     printf("ID: %i \n Precio: %i \n Cantidad: %i \n", item.id, item.precio, item.cantidad);
