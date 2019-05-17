@@ -50,7 +50,7 @@ int main(){
                 readItem(&linkedList);
                 break;
             case 3:
-                printf("Do something");
+                updateItem(&linkedList);
                 break;
             case 4:
                 printf("Do something");
@@ -103,8 +103,8 @@ void createItem(LinkedList *linkedList){
 }
 
 void readItem(LinkedList *linkedList){
-    int id_busqueda = 0;
     printf("******************BUSCAR******************* \n");
+    int id_busqueda = 0;
     printf("Ingresa el id a buscar: \n");
     scanf("%i", &id_busqueda);
     if (linkedList->node != NULL){
@@ -117,6 +117,29 @@ void readItem(LinkedList *linkedList){
         }
         if (loadNode->item.id == id_busqueda){
             printItem(loadNode->item); //Last item
+        }
+    }
+    printf("******************************************* \n");
+}
+
+void updateItem(LinkedList *linkedList){
+    printf("******************UPDATE******************* \n");
+    //printf()
+    int id_busqueda = 0;
+    printf("Ingresa el id del item a buscar: \n");
+    scanf("%i", &id_busqueda);
+    Node *node = (Node*)malloc(sizeof(Node));;
+    createNode(node);
+    if (linkedList->node != NULL){
+        Node *loadNode = linkedList->node;
+        while (loadNode->next != NULL){
+            if (loadNode->item.id == id_busqueda){
+                loadNode->item = node->item;
+            }
+            loadNode = loadNode->next;
+        }
+        if (loadNode->item.id == id_busqueda){
+            loadNode->item = node->item;
         }
     }
     printf("******************************************* \n");
