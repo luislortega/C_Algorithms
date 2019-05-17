@@ -16,7 +16,7 @@ struct linkedList {
     struct node *node;
 };
 
-typedef struct item Item;
+//typedef struct item Item;
 typedef struct node Node;
 typedef struct linkedList LinkedList;
 
@@ -33,8 +33,6 @@ void deleteItem(LinkedList*);
 void printAllItems(LinkedList*);
 
 /* Item manipulation */
-Item* swap(Item*, Item*);
-Item* compareTo(Item*, Item*); //Make the real compareTo...
 void printItem(struct item);
 void createNode(Node*);
 
@@ -53,7 +51,7 @@ int main(){
                 updateItem(&linkedList);
                 break;
             case 4:
-                printf("Do something");
+                deleteItem(&linkedList);
                 break;
             case 5:
                 printAllItems(&linkedList);
@@ -140,6 +138,35 @@ void updateItem(LinkedList *linkedList){
         }
         if (loadNode->item.id == id_busqueda){
             loadNode->item = node->item;
+        }
+    }
+    printf("******************************************* \n");
+}
+
+void deleteItem(LinkedList *linkedList){
+    printf("******************DELETE******************* \n");
+    int id_busqueda = 0;
+    printf("Ingresa el ID del item a eliminar: \n");
+    scanf("%i", &id_busqueda);
+    if (linkedList->node != NULL){
+        Node *loadNode = linkedList->node;
+        int count = 0;
+        while (loadNode->next != NULL){
+
+            //Error
+            if (loadNode->item.id == id_busqueda && count == 0){
+                loadNode->item = loadNode->next->item;
+                loadNode->next = loadNode->next->next;
+            }
+
+            if (loadNode->next->item.id == id_busqueda){
+                loadNode->next = loadNode->next->next;
+            }
+            loadNode = loadNode->next;
+            count += 1;
+        }
+        if (loadNode->item.id == id_busqueda){
+            linkedList->node = NULL; //Delete only the first item.
         }
     }
     printf("******************************************* \n");
