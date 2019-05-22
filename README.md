@@ -43,4 +43,5 @@
 - #41 CRUD based on Nodes (LinkedList emulation) 
 
 **Special algorithms**
-- Dijktra.c to search the shortest route in a map
+- Dijktra.c search the shortest route in a map
+- TreeSon.c search the number of parents until the node
